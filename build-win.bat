@@ -1,2 +1,2 @@
-python -m pip install -r requirements.txt
 pyinstaller --name "Shifting Stones" --icon res/Moon_Tile.png --windowed --add-data="res/Bird_Tile.png:res/." --add-data="res/Boat_Tile.png:res/." --add-data="res/Fish_Tile.png:res/." --add-data="res/Moon_Tile.png:res/." --add-data="res/Seed_Tile.png:res/." --add-data="res/Sun_Tile.png:res/." --add-data="res/Tree_Tile.png:res/." --add-data="res/Unicorn_Tile.png:res/." main.py
+cp dist/Shifting\ Stones.app .
