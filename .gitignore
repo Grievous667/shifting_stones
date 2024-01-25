@@ -6,4 +6,8 @@ build
 dist
 
 # Ignore pyinstaller files
-Shifting\ Stones.spec
+Shifting_Stones.spec
+
+# Ignore executables
+*.app
+*.exe
