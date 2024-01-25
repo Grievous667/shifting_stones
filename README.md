@@ -43,6 +43,6 @@ run `python main.py`.
 
 4. Run the app
 
-    `.\Shifting_Stones.exe`
+    `./Shifting_Stones.app/Contents/MacOS/Shifting_Stones`
 
     **You can also double click it in Finder.**
