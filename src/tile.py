@@ -15,10 +15,6 @@ class Tile():
         other_tile.pos = pos_copy
 
     def flip(self):
-        if self.flipped == False:
-            self.flipped = True
-            return True
-        elif self.flipped == True:
-            self.flipped = False
-            return False
+        self.flipped = not self.flipped
+        return self.flipped
         
