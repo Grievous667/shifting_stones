@@ -92,6 +92,9 @@ class PygameEnvironment():
                 elif self.keys[pygame.K_SPACE]: 
                     self.selection.flip()
                     self.can_click = False
+                
+                if self.can_click == False:
+                    self.grid.update_gridstate()
         
 if __name__ == '__main__':
     print(__file__)      
