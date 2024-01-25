@@ -3,6 +3,7 @@ import random
 
 class Slot():
     tile_size = 200
+    
     def __init__(self, surf, x, y) -> None:
         self.x = x
         self.y = y
@@ -50,7 +51,7 @@ class Slot():
                 if grid[row][c] == self and grid[row][c] != grid[row][2]:
                     x = self.card
                     grid[row][c].card = grid[row][c+1].card
-                    grid[row][c+1].card = x
+                    grid[row][c + 1].card = x
                     return grid
         return grid
 
@@ -60,7 +61,7 @@ class Slot():
                 if grid[row][c] == self and grid[row][c] != grid[row][0]:
                     x = self.card
                     grid[row][c].card = grid[row][c-1].card
-                    grid[row][c-1].card = x
+                    grid[row][c - 1].card = x
                     return grid
         return grid
 
@@ -70,7 +71,7 @@ class Slot():
                 if grid[row][c] == self and grid[row][c] != grid[0][c]:
                     x = self.card
                     grid[row][c].card = grid[row-1][c].card
-                    grid[row-1][c].card = x
+                    grid[row - 1][c].card = x
                     return grid
         return grid
     
@@ -80,7 +81,7 @@ class Slot():
                 if grid[row][c] == self and grid[row][c] != grid[2][c]:
                     x = self.card
                     grid[row][c].card = grid[row+1][c].card
-                    grid[row+1][c].card = x
+                    grid[row + 1][c].card = x
                     return grid
         return grid
     
@@ -201,10 +202,11 @@ class PygameEnvironment():
 
         self.grid = []
         gx = Slot.tile_size
-        gy = Slot.tile_size/2
+        gy = Slot.tile_size / 2
+        
         for i in range(3): 
             self.grid.append([])
-            for j in range(3):
+            for _ in range(3):
                 self.grid[i].append(Slot(self.s, gx, gy))
                 gx += Slot.tile_size + 10
             gx = Slot.tile_size
