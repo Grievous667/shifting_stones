@@ -6,6 +6,8 @@ class GameGrid():
         self.tile_size = Tile.tile_size
         self.tile_choices = [SunMoon, FishBird, FishBird, SeedTree, SeedTree, SeedTree, HorseBoat, HorseBoat, HorseBoat]
         self.active_tiles = []
+
+        self.gridstate = [[None, None, None],[None, None, None],[None, None, None]]
         
         self.surf = pygame_surf
 
