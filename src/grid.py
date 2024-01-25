@@ -17,6 +17,11 @@ class GameGrid():
                 new_tile.flipped = tileflip
                 self.active_tiles.append(new_tile)
                 self.tile_choices.remove(self.tile_choices[tiletype])
+        self.update_gridstate()
+        
+    def update_gridstate(self):
+        for tile in self.active_tiles:
+            self.gridstate[tile.pos[0]][tile.pos[1]] = tile
 
     def draw_tiles(self):
         for tile in self.active_tiles:
