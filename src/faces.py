@@ -1,7 +1,7 @@
 import pygame, os
 from pathlib import Path
 
-from .card import Card
+from .tile import Tile
 
 def get_asset_path(filename):
     """
@@ -12,50 +12,47 @@ def get_asset_path(filename):
     BASE_ASSET_DIR = os.path.dirname(__file__)[:-4] # Execution directory, with /src stripped
     return Path(os.path.join(BASE_ASSET_DIR, f'./res/{filename}')) # A platform-indpendant path to the asset
 
-class SunMoon(Card):
+
+class SunMoon():
     def __init__(self) -> None:
-        Card.__init__(self)
-        self.side_1 = 'yellow'
-        self.side_2 = 'grey'
         try:
-            self.img_1 = pygame.transform.scale(pygame.image.load(get_asset_path('Sun_Tile.png')), [self.tile_size, self.tile_size])
-            self.img_2 = pygame.transform.scale(pygame.image.load(get_asset_path('Moon_Tile.png')), [self.tile_size, self.tile_size])
+            self.upface = pygame.transform.scale(pygame.image.load('res/Sun_Tile.png'), [Tile.tile_size, Tile.tile_size])
+            self.downface = pygame.transform.scale(pygame.image.load('res/Moon_Tile.png'), [Tile.tile_size, Tile.tile_size])
         except:
-            self.img_1 = None
-            self.img_2 = None
+            self.upface = pygame.Surface((Tile.tile_size, Tile.tile_size))
+            self.downface = pygame.Surface((Tile.tile_size, Tile.tile_size))
+            self.upface.fill('yellow')
+            self.downface.fill('grey')
 
-class FishBird(Card):
+class FishBird():
     def __init__(self) -> None:
-        Card.__init__(self)
-        self.side_1 = 'orange'
-        self.side_2 = 'red'
         try:
-            self.img_1 = pygame.transform.scale(pygame.image.load(get_asset_path('Fish_Tile.png')), [self.tile_size, self.tile_size])
-            self.img_2 = pygame.transform.scale(pygame.image.load(get_asset_path('Bird_Tile.png')), [self.tile_size, self.tile_size])
-        except: 
-            self.img_1 = None
-            self.img_2 = None
+            self.upface = pygame.transform.scale(pygame.image.load('res/Bird_Tile.png'), [Tile.tile_size, Tile.tile_size])
+            self.downface = pygame.transform.scale(pygame.image.load('res/Fish_Tile.png'), [Tile.tile_size, Tile.tile_size])
+        except:
+            self.upface = pygame.Surface((Tile.tile_size, Tile.tile_size))
+            self.downface = pygame.Surface((Tile.tile_size, Tile.tile_size))
+            self.upface.fill('red')
+            self.downface.fill('orange')
 
-class UnicornBoat(Card):
+class HorseBoat():
     def __init__(self) -> None:
-        Card.__init__(self)
-        self.side_1 = 'purple'
-        self.side_2 = 'cyan'
         try:
-            self.img_1 = pygame.transform.scale(pygame.image.load(get_asset_path('Unicorn_Tile.png')), [self.tile_size, self.tile_size])
-            self.img_2 = pygame.transform.scale(pygame.image.load(get_asset_path('Boat_Tile.png')), [self.tile_size, self.tile_size])
-        except: 
-            self.img_1 = None
-            self.img_2 = None
+            self.upface = pygame.transform.scale(pygame.image.load('res/Unicorn_Tile.png'), [Tile.tile_size, Tile.tile_size])
+            self.downface = pygame.transform.scale(pygame.image.load('res/Boat_Tile.png'), [Tile.tile_size, Tile.tile_size])
+        except:
+            self.upface = pygame.Surface((Tile.tile_size, Tile.tile_size))
+            self.downface = pygame.Surface((Tile.tile_size, Tile.tile_size))
+            self.upface.fill('purple')
+            self.downface.fill('cyan')
 
-class SeedTree(Card):
+class SeedTree():
     def __init__(self) -> None:
-        Card.__init__(self)
-        self.side_1 = 'white'
-        self.side_2 = 'green'
         try:
-            self.img_1 = pygame.transform.scale(pygame.image.load(get_asset_path('Seed_Tile.png')), [self.tile_size, self.tile_size])
-            self.img_2 = pygame.transform.scale(pygame.image.load(get_asset_path('Tree_Tile.png')), [self.tile_size, self.tile_size])
-        except: 
-            self.img_1 = None
-            self.img_2 = None
+            self.upface = pygame.transform.scale(pygame.image.load('res/Tree_Tile.png'), [Tile.tile_size, Tile.tile_size])
+            self.downface = pygame.transform.scale(pygame.image.load('res/Seed_Tile.png'), [Tile.tile_size, Tile.tile_size])
+        except:
+            self.upface = pygame.Surface((Tile.tile_size, Tile.tile_size))
+            self.downface = pygame.Surface((Tile.tile_size, Tile.tile_size))
+            self.upface.fill('green')
+            self.downface.fill('white')
