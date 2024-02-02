@@ -27,13 +27,13 @@ class SunMoon():
 class FishBird():
     def __init__(self) -> None:
         try:
-            self.upface = pygame.transform.scale(pygame.image.load('res/Bird_Tile.png'), [Tile.tile_size, Tile.tile_size])
-            self.downface = pygame.transform.scale(pygame.image.load('res/Fish_Tile.png'), [Tile.tile_size, Tile.tile_size])
+            self.upface = pygame.transform.scale(pygame.image.load('res/Fish_Tile.png'), [Tile.tile_size, Tile.tile_size])
+            self.downface = pygame.transform.scale(pygame.image.load('res/Bird_Tile.png'), [Tile.tile_size, Tile.tile_size])
         except:
             self.upface = pygame.Surface((Tile.tile_size, Tile.tile_size))
             self.downface = pygame.Surface((Tile.tile_size, Tile.tile_size))
-            self.upface.fill('red')
-            self.downface.fill('orange')
+            self.upface.fill('orange')
+            self.downface.fill('red')
 
 class HorseBoat():
     def __init__(self) -> None:
@@ -49,10 +49,10 @@ class HorseBoat():
 class SeedTree():
     def __init__(self) -> None:
         try:
-            self.upface = pygame.transform.scale(pygame.image.load('res/Tree_Tile.png'), [Tile.tile_size, Tile.tile_size])
-            self.downface = pygame.transform.scale(pygame.image.load('res/Seed_Tile.png'), [Tile.tile_size, Tile.tile_size])
+            self.upface = pygame.transform.scale(pygame.image.load('res/Seed_Tile.png'), [Tile.tile_size, Tile.tile_size])
+            self.downface = pygame.transform.scale(pygame.image.load('res/Tree_Tile.png'), [Tile.tile_size, Tile.tile_size])
         except:
             self.upface = pygame.Surface((Tile.tile_size, Tile.tile_size))
             self.downface = pygame.Surface((Tile.tile_size, Tile.tile_size))
-            self.upface.fill('green')
-            self.downface.fill('white')
+            self.upface.fill('white')
+            self.downface.fill('green')
