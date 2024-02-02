@@ -1,6 +1,7 @@
 import pygame, random
 from .faces import *
 
+
 class GameGrid():
     def __init__(self, pygame_surf) -> None:
         self.tile_size = Tile.tile_size
@@ -23,11 +24,13 @@ class GameGrid():
         
     def update_gridstate(self):
         for tile in self.active_tiles:
-            self.gridstate[tile.pos[0]][tile.pos[1]] = tile
+            self.gridstate[tile.pos[0]][tile.pos[1]] = [type(tile.type), tile.flipped]
+        
 
     def draw_tiles(self):
         for tile in self.active_tiles:
-            tile.rect = pygame.draw.rect(self.surf, 'red', [((tile.pos[0]+1)*Tile.tile_size) + (5*tile.pos[0]), ((tile.pos[1]+1)*Tile.tile_size) + (5*tile.pos[1])-100, Tile.tile_size, Tile.tile_size], 1)
+            # tile.rect = pygame.draw.rect(self.surf, 'red', [((tile.pos[0]+1)*Tile.tile_size) + (5*tile.pos[0]), ((tile.pos[1]+1)*Tile.tile_size) + (5*tile.pos[1])-100, Tile.tile_size, Tile.tile_size], 1)
+            tile.rect = pygame.Rect([((tile.pos[0]+1)*Tile.tile_size) + (5*tile.pos[0]) + 150, ((tile.pos[1]+1)*Tile.tile_size) + (5*tile.pos[1])-100, Tile.tile_size, Tile.tile_size])
             if tile.flipped == False:
                 self.surf.blit(tile.type.upface, tile.rect)
             else: self.surf.blit(tile.type.downface, tile.rect)
