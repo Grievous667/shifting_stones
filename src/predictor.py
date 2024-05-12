@@ -10,41 +10,42 @@ class Predictor():
 
     def get_valid_pairs(self, gridstate, target_card):
         for c in target_card: 
-            target_locations = []
-            potential_matches = []
-            for x in range(3):
-                for y in range(3):                            
-                    if c[x][y] != 9 and c[x][y] != 8:
-                        target_locations.append([c[x][y], [x,y]])
-                        for match in self.get_valid_tiles(gridstate, c[x][y]):
-                            potential_matches.append([gridstate[match[0]][match[1]], match])
-            
-            # Targetmatchlist holds all potential matches and the target locations. Permutations are made, and every combo without a target location is culled.
-            # This means that the result of all the shennanigans here is that all the combinations of tile to target location get put in combo_list
-            targetmatchlist = potential_matches.copy()
-            targetmatchlist.extend(target_locations)
+            if type(c) != int:
+                target_locations = []
+                potential_matches = []
+                for x in range(3):
+                    for y in range(3):                            
+                        if c[x][y] != 9 and c[x][y] != 8:
+                            target_locations.append([c[x][y], [x,y]])
+                            for match in self.get_valid_tiles(gridstate, c[x][y]):
+                                potential_matches.append([gridstate[match[0]][match[1]], match])
+                
+                # Targetmatchlist holds all potential matches and the target locations. Permutations are made, and every combo without a target location is culled.
+                # This means that the result of all the shennanigans here is that all the combinations of tile to target location get put in combo_list
+                targetmatchlist = potential_matches.copy()
+                targetmatchlist.extend(target_locations)
 
-            combos = it.permutations(targetmatchlist, 2)
-            combo_list = []
+                combos = it.permutations(targetmatchlist, 2)
+                combo_list = []
 
-            unique_targets = 1
-            for combo in combos:
-                combo = list(combo)
-                if (combo[0] in target_locations and combo[1] not in target_locations) or (combo[0] in target_locations and combo[1] in target_locations and combo[1] in potential_matches) or (combo[0] in target_locations and combo[1] in target_locations and combo[0] == combo[1]):
-                    if combo[0][0] == combo[1][0] or combo[0][0] % 2 == 0 and combo[0][0] == combo[1][0]-1 or combo[0][0] % 2 != 0 and combo[0][0] == combo[1][0]+1 :
-                        if combo not in combo_list:
-                            if len(combo_list) >= 1 and combo[0] != combo_list[len(combo_list)-1][0]: unique_targets += 1
-                            combo_list.append(combo)    
+                unique_targets = 1
+                for combo in combos:
+                    combo = list(combo)
+                    if (combo[0] in target_locations and combo[1] not in target_locations) or (combo[0] in target_locations and combo[1] in target_locations and combo[1] in potential_matches) or (combo[0] in target_locations and combo[1] in target_locations and combo[0] == combo[1]):
+                        if combo[0][0] == combo[1][0] or combo[0][0] % 2 == 0 and combo[0][0] == combo[1][0]-1 or combo[0][0] % 2 != 0 and combo[0][0] == combo[1][0]+1 :
+                            if combo not in combo_list:
+                                if len(combo_list) >= 1 and combo[0] != combo_list[len(combo_list)-1][0]: unique_targets += 1
+                                combo_list.append(combo)    
 
-            # This upcoming code justs culls repeats
-            pairlist = []
-            for combo in it.combinations(combo_list, unique_targets):
-                combo = list(combo)
-                pairlist.append(combo)
-                for i in range(len(combo)):   
-                    if self.remove_repeats(i, combo, unique_targets) == True: 
-                        pairlist.remove(combo)
-                        break
+                # This upcoming code justs culls repeats
+                pairlist = []
+                for combo in it.combinations(combo_list, unique_targets):
+                    combo = list(combo)
+                    pairlist.append(combo)
+                    for i in range(len(combo)):   
+                        if self.remove_repeats(i, combo, unique_targets) == True: 
+                            pairlist.remove(combo)
+                            break
             return pairlist
         
 
@@ -54,40 +55,41 @@ class Predictor():
         #   Then append each tile on the current board that can potentially match a target tile to the potential_matches list
         move_list = []
         for c in target_card: 
-            target_locations = []
-            potential_matches = []
-            for x in range(3):
-                for y in range(3):                            
-                    if c[x][y] != 9 and c[x][y] != 8:
-                        target_locations.append([c[x][y], [x,y]])
-                        for match in self.get_valid_tiles(gridstate, c[x][y]):
-                            potential_matches.append(match)
-            
-            # Targetmatchlist holds all potential matches and the target locations. Permutations are made, and every combo without a target location is culled.
-                # This means that the result of all the shennanigans here is that all the combinations of tile to target location get put in combo_list
-            targetmatchlist = potential_matches.copy()
-            targetmatchlist.extend(target_locations)
+            if type(c) != int:
+                target_locations = []
+                potential_matches = []
+                for x in range(3):
+                    for y in range(3):                            
+                        if c[x][y] != 9 and c[x][y] != 8:
+                            target_locations.append([c[x][y], [x,y]])
+                            for match in self.get_valid_tiles(gridstate, c[x][y]):
+                                potential_matches.append(match)
+                
+                # Targetmatchlist holds all potential matches and the target locations. Permutations are made, and every combo without a target location is culled.
+                    # This means that the result of all the shennanigans here is that all the combinations of tile to target location get put in combo_list
+                targetmatchlist = potential_matches.copy()
+                targetmatchlist.extend(target_locations)
 
-            combos = it.permutations(targetmatchlist, 2)
-            combo_list = []
+                combos = it.permutations(targetmatchlist, 2)
+                combo_list = []
 
-            unique_targets = 1
-            for combo in combos:
-                combo = list(combo)
-                if (combo[0] in target_locations and combo[1] not in target_locations) or (combo[0] in target_locations and combo[1] in target_locations and combo[1] in potential_matches) or (combo[0] in target_locations and combo[1] in target_locations and combo[0] == combo[1]):
-                    if combo[0][0] == combo[1][0] or combo[0][0] % 2 == 0 and combo[0][0] == combo[1][0]-1 or combo[0][0] % 2 != 0 and combo[0][0] == combo[1][0]+1 :
-                        if combo not in combo_list:
-                            if len(combo_list) >= 1 and combo[0] != combo_list[len(combo_list)-1][0]: unique_targets += 1
-                            combo_list.append(combo)    
+                unique_targets = 1
+                for combo in combos:
+                    combo = list(combo)
+                    if (combo[0] in target_locations and combo[1] not in target_locations) or (combo[0] in target_locations and combo[1] in target_locations and combo[1] in potential_matches) or (combo[0] in target_locations and combo[1] in target_locations and combo[0] == combo[1]):
+                        if combo[0][0] == combo[1][0] or combo[0][0] % 2 == 0 and combo[0][0] == combo[1][0]-1 or combo[0][0] % 2 != 0 and combo[0][0] == combo[1][0]+1 :
+                            if combo not in combo_list:
+                                if len(combo_list) >= 1 and combo[0] != combo_list[len(combo_list)-1][0]: unique_targets += 1
+                                combo_list.append(combo)    
 
-            # This upcoming code justs culls repeats
-            for combo in it.combinations(combo_list, unique_targets):
-                combo = list(combo)
-                move_list.append(combo)
-                for i in range(len(combo)):   
-                    if self.remove_repeats(i, combo, unique_targets) == True: 
-                        move_list.remove(combo)
-                        break
+                # This upcoming code justs culls repeats
+                for combo in it.combinations(combo_list, unique_targets):
+                    combo = list(combo)
+                    move_list.append(combo)
+                    for i in range(len(combo)):   
+                        if self.remove_repeats(i, combo, unique_targets) == True: 
+                            move_list.remove(combo)
+                            break
         return move_list
 
     def is_valid_move(self, grid, x, y):
@@ -121,6 +123,8 @@ class Predictor():
             
             permutations = self.get_permutations(gridstate, target_card) # Get tile/target location pairings per legal target location
             best_point_sum = 1000  # Arbitrarily large to start. This will be reduced later
+            best_move_set = []
+            best_overlap_set = []
             pathlist = []   
             unique_targets = 0
 
@@ -140,12 +144,14 @@ class Predictor():
                     # Per set variable definitions 
                     subtrehand = 0
                     point_sum  = 0
-                    used = []
+                    used           = []
+                    overlap        = []
                     moved_fin_list = []
+                    flip_set       = []
 
                     for path in set:point_sum += len(path)
                     for pair in permutation: 
-                        if pair[0][0] != pair[1][0]: point_sum += 1
+                        if pair[0][0] != pair[1][0]: point_sum += 1 ; flip_set.append(pair[1][1])
 
                     for path in set:
                         for step in path:
@@ -159,12 +165,16 @@ class Predictor():
                             for path_2 in set:
                                 for step_2 in path_2:   
                                     if [path, path_2] not in used:
-                                        if [step[0],step[1]] == [step_2[1], step_2[0]]: subtrehand += 1 ; used.append([path, path_2]) ; used.append([path_2, path]) ; 
+                                        if [step[0],step[1]] == [step_2[1], step_2[0]]: subtrehand += 1 ; used.append([path, path_2]) ; used.append([path_2, path]) ; overlap.append(step)
 
                     point_sum -= subtrehand
-                    if point_sum < best_point_sum: best_point_sum = point_sum
-
-            return best_point_sum
+                    if point_sum < best_point_sum: 
+                        best_point_sum = point_sum  
+                        best_move_set = set 
+                        best_overlap_set = overlap
+                        best_flip_set = flip_set
+            
+            return [best_point_sum, best_move_set, best_flip_set, best_overlap_set]
 
 
     def remove_repeats(self, i, combo, unique_targets):
