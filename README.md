@@ -19,11 +19,13 @@ run `python main.py`.
 
     `>>> pip install -r requirements.txt`
 
-3. Run the build script in `cmd`
+3. Copy the `res` folder to the generated `dist/Shifting_Stones` directory. The `res` folder should be in the same folder as the `Shifting_Stones.exe` file
+
+4. Run the build script in `cmd`
 
     `>> .\build-win.bat`
 
-4. Run the exe
+5. Run the exe
 
     `.\Shifting_Stones.exe`
 
@@ -41,7 +43,9 @@ run `python main.py`.
 
     `>> ./build-mac.sh`
 
-4. Run the app
+4. Ensure that the app can access the image resources
+
+5. Run the app
 
     `./Shifting_Stones.app/Contents/MacOS/Shifting_Stones`
 
